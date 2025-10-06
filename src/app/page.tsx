@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ export default function Home() {
   const [message, setMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -50,6 +51,7 @@ export default function Home() {
         setMessage('Failed to submit form. Please try again.');
       }
     } catch (error) {
+      console.error('Form submission error:', error);
       setMessage('An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -60,9 +62,11 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4 sm:p-6 lg:p-8">
       <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 lg:p-12 w-full max-w-5xl border border-gray-100">
         <div className="text-center mb-8 lg:mb-10">
-          <img
+          <Image
             src="/Kira_main_logo.png"
             alt="Kira Logo"
+            width={200}
+            height={100}
             className="mx-auto mb-6 h-20 sm:h-24 lg:h-28 w-auto"
           />
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
